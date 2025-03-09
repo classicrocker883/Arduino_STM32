@@ -56,7 +56,7 @@ struct rom_img_cfg {
     int *img_start;
 };
 
-extern char _lm_rom_img_cfgp;
+extern char _lm_rom_img_cfgp[sizeof(struct rom_img_cfg)];
 
 void __attribute__((noreturn)) start_c(void) {
     struct rom_img_cfg *img_cfg = (struct rom_img_cfg*)&_lm_rom_img_cfgp;

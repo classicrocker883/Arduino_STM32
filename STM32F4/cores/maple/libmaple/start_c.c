@@ -59,7 +59,7 @@ struct rom_img_cfg {
     int *ccmimg_start;
 };
 
-extern char _lm_rom_img_cfgp;
+extern char _lm_rom_img_cfgp[sizeof(struct rom_img_cfg)];
 
 void __attribute__((noreturn)) start_c(void) {
     struct rom_img_cfg *img_cfg = (struct rom_img_cfg*)&_lm_rom_img_cfgp;
@@ -76,7 +76,7 @@ void __attribute__((noreturn)) start_c(void) {
     }
 #ifdef __CCMRAM__
 extern char __ccmdata_start__, __ccmdata_end__;
-    /* Initialize .ccm, if necessary. */    
+    /* Initialize .ccm, if necessary. */
     src = img_cfg->ccmimg_start;
     dst = (int*)&__ccmdata_start__;
     if (src != dst) {
